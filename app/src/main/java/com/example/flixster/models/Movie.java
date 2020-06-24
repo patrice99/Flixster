@@ -29,7 +29,7 @@ public class Movie {
     }
 
     public String  getPosterPath() {
-        //hardcoding the width to be 342
+        //hardcoding the width to be 342, this makes the posterpath full URL
         return String.format("https://image.tmdb.org/t/p/w342/%s",posterPath);
     }
 
