@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.flixster.R;
 import com.example.flixster.models.Movie;
 
@@ -40,8 +41,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         //Get the movie at the passed position
         Movie movie = movies.get(position);
 
-        //Bind the movie
-
+        //Bind the movie data into the view holder
+        holder.bind(movie);
     }
 
     //returns the number of items in the list
@@ -62,6 +63,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvOverview = itemView.findViewById(R.id.tvOverview);
             ivPoster = itemView.findViewById(R.id.ivPoster);
+        }
+
+        public void bind(Movie movie) {
+            tvTitle.setText(movie.getTitle());
+            tvOverview.setText(movie.getOverview());
+            Glide.with(context).load(movie.getPosterPath()).into(ivPoster);
+
         }
     }
 }
