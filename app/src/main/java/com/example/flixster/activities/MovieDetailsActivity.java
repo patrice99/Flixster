@@ -22,6 +22,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
     TextView tvTitle;
     TextView tvOverView;
     RatingBar rbVoteAverage;
+    TextView tvPopularity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +38,12 @@ public class MovieDetailsActivity extends AppCompatActivity {
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvOverView = (TextView) findViewById(R.id.tvOverview);
         rbVoteAverage = (RatingBar) findViewById(R.id.rbVoteAverage);
+        tvPopularity = (TextView) findViewById(R.id.tvPopularity);
 
         //set the text for title and overview
         tvTitle.setText(movie.getTitle());
         tvOverView.setText(movie.getOverview());
+        tvPopularity.setText("Popularity : " + movie.getPopularity().toString());
 
         //set the Rating bar
         float voteavg = movie.getVoteAverage().floatValue();
