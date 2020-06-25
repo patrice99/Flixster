@@ -18,6 +18,8 @@ import com.example.flixster.MovieDetailsActivity;
 import com.example.flixster.R;
 import com.example.flixster.models.Movie;
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
@@ -100,7 +102,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 //Create an intent to display MovieDetailsActivity
                 Intent intent = new Intent(context, MovieDetailsActivity.class);
                 //Pass the movie as an extra serialized
-                intent.putExtra(Movie.class.getSimpleName(), Parcles.wrap(movie));
+                intent.putExtra(Movie.class.getSimpleName(), Parcels.wrap(movie));
                 //show the activity
                 context.startActivity(intent);
             }
