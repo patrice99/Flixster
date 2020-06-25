@@ -16,6 +16,7 @@ public class Movie {
     String overview;
     String backDropPath;
     Double voteAverage;
+    Double popularity;
 
     //default, no args constructor for parceler
     public Movie() {}
@@ -27,6 +28,7 @@ public class Movie {
         overview = jsonObject.getString("overview");
         backDropPath = jsonObject.getString("backdrop_path");
         voteAverage = jsonObject.getDouble("vote_average");
+        popularity = jsonObject.getDouble("popularity");
     }
 
     public static List<Movie> fromJsonArray(JSONArray movieJsonArray) throws JSONException {
@@ -56,5 +58,9 @@ public class Movie {
 
     public Double getVoteAverage() {
         return voteAverage;
+    }
+
+    public Double getPopularity() {
+        return popularity;
     }
 }
