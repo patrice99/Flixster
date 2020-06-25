@@ -22,6 +22,6 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         //unwrap the movie passed via intent, using its simple name as a key
         movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
-        Log.d("MovieDetailsActivity", "Showing details for" + movie.getTitle());
+        Log.d("MovieDetailsActivity", "Showing details for " + movie.getTitle());
     }
 }
