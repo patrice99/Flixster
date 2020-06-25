@@ -25,6 +25,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     TextView tvPopularity;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
