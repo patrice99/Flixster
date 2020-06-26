@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String NOW_PLAYING_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=6d1de0b93ec9c02249d4812fcce98720";
     public static final String TAG = "MainActivity";
-
     List<Movie> movies;
 
 
@@ -36,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //using ViewBinding to get ride of boilerplate code
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         client.get(NOW_PLAYING_URL, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
-                Log.d(TAG, "onSuccess");
+                Log.i(TAG,"onSuccess");
                 JSONObject jsonObject= json.jsonObject;
                 try {
                     JSONArray results = jsonObject.getJSONArray("results");
@@ -70,12 +70,10 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-
             }
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.d(TAG, "onFailure");
-
+                Log.e(TAG, "JsonHttpResponseHandler failed, onFailure");
             }
         });
     }

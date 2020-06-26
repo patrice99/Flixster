@@ -33,9 +33,10 @@ import okhttp3.Headers;
 public class MovieDetailsActivity extends AppCompatActivity {
 
     public final String VIDEOS_API_URL = "https://api.themoviedb.org/3/movie/%d/videos" + "?api_key=6d1de0b93ec9c02249d4812fcce98720";
+    String youtubeKey;
+
     //the movie details we want to display
     Movie movie;
-    String youtubeKey;
 
 
 
@@ -45,7 +46,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //unwrap the movie passed via intent, using its simple name as a key
         movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
-        Log.d("MovieDetailsActivity", "Showing details for " + movie.getTitle());
+        Log.i("MovieDetailsActivity", "Showing details for " + movie.getTitle());
 
         //resolve the view objects
         final ActivityMovieDetailsBinding bindDetails = ActivityMovieDetailsBinding.inflate(getLayoutInflater());
@@ -106,19 +107,16 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
 
         AsyncHttpClient client = new AsyncHttpClient();
-        Log.d("MovieDetailsActivity", fullAPIKey);
         client.get(fullAPIKey, new JsonHttpResponseHandler() {
             String TAG = "MovieDetailsActivity";
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
-                Log.d(TAG, "onSuccess");
+                Log.i(TAG, "onSuccess");
                 JSONObject jsonObject = json.jsonObject;
                 try {
                     JSONArray results = jsonObject.getJSONArray("results");
                     JSONObject idJsonObj = (JSONObject) results.get(0);
                     youtubeKey = idJsonObj.getString("key");
-                    Log.i("MovieDetailsActivity", youtubeKey);
-
                 } catch (JSONException e) {
                     Log.e(TAG, "Hit JSON Exception", e);
                     e.printStackTrace();
@@ -127,7 +125,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.d(TAG, "onFailure");
+                Log.e(TAG, "onFailure");
             }
         });
 
