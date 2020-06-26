@@ -23,24 +23,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTitle"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="5dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         android:numStars="5"
         android:stepSize="0.5" />
 
     <TextView
         android:id="@+id/tvOverview"
-        android:layout_width="321dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvPopularity"
-        android:layout_alignBottom="@+id/ivPoster"
-        android:layout_alignParentEnd="true"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="-20dp"
-        android:layout_toEndOf="@+id/ivPoster"
         tools:text="Britt-Marie, a woman in her sixties, decides to leave her husband and start anew. Having been housewife for most of her life and and living in small backwater town of Borg, there isn't many jobs available and soon she finds herself fending a youth football team.&quot;, release_date: &quot;2019-01-25" />
 
     <TextView
@@ -48,36 +43,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rbVoteAverage"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="10dp"
-        tools:text="Popularity : 126.47" />
-
-    <ImageView
-        android:id="@+id/ivPoster"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
-        android:layout_below="@+id/tvTitle"
         android:layout_alignParentStart="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:contentDescription="@string/poster_image"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_marginTop="10dp"
+        tools:text="Popularity : 126.47" />
 
     <ImageView
         android:id="@+id/ivBackdrop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvOverview"
+        android:layout_below="@+id/textView"
         android:layout_alignParentStart="true"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/backdrop_image"
         android:scaleType="fitXY"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvOverview"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/trailer"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 </RelativeLayout>

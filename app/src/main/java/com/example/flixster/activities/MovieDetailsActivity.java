@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.codepath.asynchttpclient.AsyncHttpClient;
@@ -77,24 +78,41 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         int radius = 30; //corner radius
         int margin = 10; //crop margin
-        Glide.with(this).load(imgUrl).placeholder(plcholder).transform(new RoundedCornersTransformation(radius, margin)).into(bindDetails.ivPoster);
-
         //backdrop
         Glide.with(this).load(movie.getBackDropPath()).placeholder(plcholder).transform(new RoundedCornersTransformation(radius, margin)).into(bindDetails.ivBackdrop);
 
 
 
-        String fullAPIKey = String.format(VIDEOS_API_URL, movie.getId());
+        final String fullAPIKey = String.format(VIDEOS_API_URL, movie.getId());
+
+        //set an OnClick Listener for the backdrop
+        bindDetails.ivBackdrop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!youtubeKey.isEmpty()) {
+                    //get the movie at that position in the list
+                    //Create an intent to display MovieTrailerActivity
+                    Intent intent = new Intent(MovieDetailsActivity.this, MovieTrailerActivity.class);
+                    //Pass the youtube key into the MovieTrailer Class
+                    intent.putExtra("youtubeKey", youtubeKey);
+                    //show the activity
+                    MovieDetailsActivity.this.startActivity(intent);
+                } else {
+                    Toast.makeText(MovieDetailsActivity.this, "Video not Available", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
 
         AsyncHttpClient client = new AsyncHttpClient();
         Log.d("MovieDetailsActivity", fullAPIKey);
         client.get(fullAPIKey, new JsonHttpResponseHandler() {
             String TAG = "MovieDetailsActivity";
-
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
                 Log.d(TAG, "onSuccess");
-                JSONObject jsonObject= json.jsonObject;
+                JSONObject jsonObject = json.jsonObject;
                 try {
                     JSONArray results = jsonObject.getJSONArray("results");
                     JSONObject idJsonObj = (JSONObject) results.get(0);
@@ -105,27 +123,11 @@ public class MovieDetailsActivity extends AppCompatActivity {
                     Log.e(TAG, "Hit JSON Exception", e);
                     e.printStackTrace();
                 }
-
-                //set an OnClick Listener for the backdrop
-                bindDetails.ivBackdrop.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //get the movie at that position in the list
-                        //Create an intent to display MovieTrailerActivity
-                        Intent intent = new Intent(MovieDetailsActivity.this,  MovieTrailerActivity.class);
-                        //Pass the youtube key into the MovieTrailer Class
-                        intent.putExtra("youtubeKey", youtubeKey);
-                        //show the activity
-                        MovieDetailsActivity.this.startActivity(intent);
-                    }
-                });
-
-
             }
+
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
                 Log.d(TAG, "onFailure");
-
             }
         });
 

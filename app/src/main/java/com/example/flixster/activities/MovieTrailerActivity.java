@@ -18,7 +18,6 @@ public class MovieTrailerActivity extends YouTubeBaseActivity {
 
         // temporary test video id -- TODO replace with movie trailer video id
         final String keyEndpoint = getIntent().getExtras().getString("youtubeKey");
-        final String videoId = "https://www.youtube.com/watch?v=" + keyEndpoint;
 
         // resolve the player view from the layout
         YouTubePlayerView playerView = (YouTubePlayerView) findViewById(R.id.player);
@@ -29,7 +28,6 @@ public class MovieTrailerActivity extends YouTubeBaseActivity {
             public void onInitializationSuccess(YouTubePlayer.Provider provider,
                                                 YouTubePlayer youTubePlayer, boolean b) {
                 // do any work here to cue video, play video, etc.
-                Log.i("MovieTrailerActivity", keyEndpoint);
                 youTubePlayer.cueVideo(keyEndpoint);
             }
 

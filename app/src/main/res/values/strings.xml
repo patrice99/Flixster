@@ -3,4 +3,5 @@
     <string name="poster_for_movie">poster for movie</string>
     <string name="poster_image">poster image</string>
     <string name="backdrop_image">backdrop image</string>
+    <string name="trailer">Trailer:</string>
 </resources>
