@@ -27,6 +27,7 @@
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/ivPoster"
         android:textSize="24sp"
+        android:textColor="@color/white"
         tools:text="Onward" />
 
     <TextView
@@ -37,5 +38,6 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/ivPoster"
+        android:textColor="@color/white"
         tools:text="In a suburban fantasy world, two teenage elf brothers embark on an extraordinary quest to discover if there is still a little magic left out there." />
 </RelativeLayout>
