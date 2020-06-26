@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.flixster.activities.MovieDetailsActivity;
 import com.example.flixster.R;
+import com.example.flixster.databinding.ItemMovieBinding;
 import com.example.flixster.models.Movie;
 
 import org.parceler.Parcels;

@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -35,14 +36,14 @@ public class MovieDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_details);
-
         //unwrap the movie passed via intent, using its simple name as a key
         movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
         Log.d("MovieDetailsActivity", "Showing details for " + movie.getTitle());
 
         //resolve the view objects
         ActivityMovieDetailsBinding bindDetails = ActivityMovieDetailsBinding.inflate(getLayoutInflater());
+        View view = bindDetails.getRoot();
+        setContentView(view);
 
         //set the text for title and overview
         bindDetails.tvTitle.setText(movie.getTitle());
