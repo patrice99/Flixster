@@ -32,12 +32,14 @@
     <TextView
         android:id="@+id/tvOverview"
         android:layout_width="321dp"
-        android:layout_height="192dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/tvPopularity"
+        android:layout_alignBottom="@+id/ivPoster"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
+        android:layout_marginBottom="-20dp"
         android:layout_toEndOf="@+id/ivPoster"
         tools:text="Britt-Marie, a woman in her sixties, decides to leave her husband and start anew. Having been housewife for most of her life and and living in small backwater town of Borg, there isn't many jobs available and soon she finds herself fending a youth football team.&quot;, release_date: &quot;2019-01-25" />
 
@@ -63,5 +65,19 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:contentDescription="@string/poster_image"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/ivBackdrop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvOverview"
+        android:layout_alignParentStart="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="20dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/backdrop_image"
+        android:scaleType="fitXY"
         tools:srcCompat="@tools:sample/avatars" />
 </RelativeLayout>

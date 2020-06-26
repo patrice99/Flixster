@@ -3,6 +3,7 @@ package com.example.flixster.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Parcel;
@@ -31,9 +32,9 @@ import okhttp3.Headers;
 public class MovieDetailsActivity extends AppCompatActivity {
 
     public final String VIDEOS_API_URL = "https://api.themoviedb.org/3/movie/%d/videos" + "?api_key=6d1de0b93ec9c02249d4812fcce98720";
-
     //the movie details we want to display
     Movie movie;
+    String youtubeKey;
 
 
 
@@ -46,7 +47,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         Log.d("MovieDetailsActivity", "Showing details for " + movie.getTitle());
 
         //resolve the view objects
-        ActivityMovieDetailsBinding bindDetails = ActivityMovieDetailsBinding.inflate(getLayoutInflater());
+        final ActivityMovieDetailsBinding bindDetails = ActivityMovieDetailsBinding.inflate(getLayoutInflater());
         View view = bindDetails.getRoot();
         setContentView(view);
 
@@ -78,12 +79,16 @@ public class MovieDetailsActivity extends AppCompatActivity {
         int margin = 10; //crop margin
         Glide.with(this).load(imgUrl).placeholder(plcholder).transform(new RoundedCornersTransformation(radius, margin)).into(bindDetails.ivPoster);
 
+        //backdrop
+        Glide.with(this).load(movie.getBackDropPath()).placeholder(plcholder).transform(new RoundedCornersTransformation(radius, margin)).into(bindDetails.ivBackdrop);
+
+
 
         String fullAPIKey = String.format(VIDEOS_API_URL, movie.getId());
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(VIDEOS_API_URL, new JsonHttpResponseHandler() {
-            String youtubeKey;
+        Log.d("MovieDetailsActivity", fullAPIKey);
+        client.get(fullAPIKey, new JsonHttpResponseHandler() {
             String TAG = "MovieDetailsActivity";
 
             @Override
@@ -94,11 +99,26 @@ public class MovieDetailsActivity extends AppCompatActivity {
                     JSONArray results = jsonObject.getJSONArray("results");
                     JSONObject idJsonObj = (JSONObject) results.get(0);
                     youtubeKey = idJsonObj.getString("key");
+                    Log.i("MovieDetailsActivity", youtubeKey);
 
                 } catch (JSONException e) {
                     Log.e(TAG, "Hit JSON Exception", e);
                     e.printStackTrace();
                 }
+
+                //set an OnClick Listener for the backdrop
+                bindDetails.ivBackdrop.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //get the movie at that position in the list
+                        //Create an intent to display MovieTrailerActivity
+                        Intent intent = new Intent(MovieDetailsActivity.this,  MovieTrailerActivity.class);
+                        //Pass the youtube key into the MovieTrailer Class
+                        intent.putExtra("youtubeKey", youtubeKey);
+                        //show the activity
+                        MovieDetailsActivity.this.startActivity(intent);
+                    }
+                });
 
 
             }
