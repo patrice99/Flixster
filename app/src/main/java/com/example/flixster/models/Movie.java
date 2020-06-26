@@ -17,6 +17,7 @@ public class Movie {
     String backDropPath;
     Double voteAverage;
     Double popularity;
+    Integer id;
 
     //default, no args constructor for parceler
     public Movie() {}
@@ -29,6 +30,7 @@ public class Movie {
         backDropPath = jsonObject.getString("backdrop_path");
         voteAverage = jsonObject.getDouble("vote_average");
         popularity = jsonObject.getDouble("popularity");
+        id = jsonObject.getInt("id");
     }
 
     public static List<Movie> fromJsonArray(JSONArray movieJsonArray) throws JSONException {
@@ -38,6 +40,7 @@ public class Movie {
         }
         return movies;
     }
+
 
     public String  getPosterPath() {
         //hardcoding the width to be 342, this makes the posterpath full URL
@@ -62,5 +65,9 @@ public class Movie {
 
     public Double getPopularity() {
         return popularity;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

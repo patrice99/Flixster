@@ -13,22 +13,27 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.codepath.asynchttpclient.AsyncHttpClient;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.flixster.R;
 import com.example.flixster.databinding.ActivityMainBinding;
 import com.example.flixster.databinding.ActivityMovieDetailsBinding;
 import com.example.flixster.models.Movie;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.parceler.Parcels;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import okhttp3.Headers;
 
 public class MovieDetailsActivity extends AppCompatActivity {
 
+    public final String VIDEOS_API_URL = "https://api.themoviedb.org/3/movie/%d/videos" + "?api_key=6d1de0b93ec9c02249d4812fcce98720";
 
     //the movie details we want to display
     Movie movie;
-
-    //the view Objects
 
 
 
@@ -73,6 +78,36 @@ public class MovieDetailsActivity extends AppCompatActivity {
         int margin = 10; //crop margin
         Glide.with(this).load(imgUrl).placeholder(plcholder).transform(new RoundedCornersTransformation(radius, margin)).into(bindDetails.ivPoster);
 
+
+        String fullAPIKey = String.format(VIDEOS_API_URL, movie.getId());
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(VIDEOS_API_URL, new JsonHttpResponseHandler() {
+            String youtubeKey;
+            String TAG = "MovieDetailsActivity";
+
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                Log.d(TAG, "onSuccess");
+                JSONObject jsonObject= json.jsonObject;
+                try {
+                    JSONArray results = jsonObject.getJSONArray("results");
+                    JSONObject idJsonObj = (JSONObject) results.get(0);
+                    youtubeKey = idJsonObj.getString("key");
+
+                } catch (JSONException e) {
+                    Log.e(TAG, "Hit JSON Exception", e);
+                    e.printStackTrace();
+                }
+
+
+            }
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.d(TAG, "onFailure");
+
+            }
+        });
 
     }
 }

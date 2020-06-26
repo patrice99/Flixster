@@ -48,7 +48,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         itemMovieBinding = ItemMovieBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ViewHolder(itemMovieBinding.getRoot());
     }
-    
+
 
 
     //Involves populating data into the item through holder
