@@ -37,8 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         //using ViewBinding to get ride of boilerplate code
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+        setContentView(binding.getRoot());
 
 
         movies = new ArrayList<>();
