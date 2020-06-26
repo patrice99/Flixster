@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.flixster.R;
+import com.example.flixster.databinding.ActivityMainBinding;
+import com.example.flixster.databinding.ActivityMovieDetailsBinding;
 import com.example.flixster.models.Movie;
 
 import org.parceler.Parcels;
@@ -21,15 +23,12 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class MovieDetailsActivity extends AppCompatActivity {
 
+
     //the movie details we want to display
     Movie movie;
 
     //the view Objects
-    TextView tvTitle;
-    TextView tvOverView;
-    RatingBar rbVoteAverage;
-    TextView tvPopularity;
-    ImageView ivPoster;
+
 
 
 
@@ -43,20 +42,16 @@ public class MovieDetailsActivity extends AppCompatActivity {
         Log.d("MovieDetailsActivity", "Showing details for " + movie.getTitle());
 
         //resolve the view objects
-        tvTitle = (TextView) findViewById(R.id.tvTitle);
-        tvOverView = (TextView) findViewById(R.id.tvOverview);
-        rbVoteAverage = (RatingBar) findViewById(R.id.rbVoteAverage);
-        tvPopularity = (TextView) findViewById(R.id.tvPopularity);
-        ivPoster = (ImageView) findViewById(R.id.ivPoster);
+        ActivityMovieDetailsBinding bindDetails = ActivityMovieDetailsBinding.inflate(getLayoutInflater());
 
         //set the text for title and overview
-        tvTitle.setText(movie.getTitle());
-        tvOverView.setText(movie.getOverview());
-        tvPopularity.setText("Popularity : " + movie.getPopularity().toString());
+        bindDetails.tvTitle.setText(movie.getTitle());
+        bindDetails.tvOverview.setText(movie.getOverview());
+        bindDetails.tvPopularity.setText("Popularity : " + movie.getPopularity().toString());
 
         //set the Rating bar
         float voteavg = movie.getVoteAverage().floatValue();
-        rbVoteAverage.setRating(voteavg > 0 ? voteavg / 2.0f : voteavg);
+        bindDetails.rbVoteAverage.setRating(voteavg > 0 ? voteavg / 2.0f : voteavg);
 
         //set the imageView
         String imgUrl;
@@ -75,7 +70,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         int radius = 30; //corner radius
         int margin = 10; //crop margin
-        Glide.with(this).load(imgUrl).placeholder(plcholder).transform(new RoundedCornersTransformation(radius, margin)).into(ivPoster);
+        Glide.with(this).load(imgUrl).placeholder(plcholder).transform(new RoundedCornersTransformation(radius, margin)).into(bindDetails.ivPoster);
 
 
     }
