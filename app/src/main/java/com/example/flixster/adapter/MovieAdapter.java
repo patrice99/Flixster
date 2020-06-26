@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -37,14 +38,17 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         this.movies = movies;
     }
 
+    ItemMovieBinding itemMovieBinding;
+
     //Usually involves inflating a layout from XML and returning the ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d("MovieAdapter", "onCreateViewHolder");
-        View movieView = LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false);
-        return new ViewHolder(movieView);
+        itemMovieBinding = ItemMovieBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new ViewHolder(itemMovieBinding.getRoot());
     }
+    
 
 
     //Involves populating data into the item through holder
@@ -66,22 +70,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView tvTitle;
-        TextView tvOverview;
-        ImageView ivPoster;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvTitle);
-            tvOverview = itemView.findViewById(R.id.tvOverview);
-            ivPoster = itemView.findViewById(R.id.ivPoster);
             itemView.setOnClickListener(this);
         }
 
+
         public void bind(Movie movie) {
-            tvTitle.setText(movie.getTitle());
-            tvOverview.setText(movie.getOverview());
+            itemMovieBinding.tvTitle.setText(movie.getTitle());
+            itemMovieBinding.tvOverview.setText(movie.getOverview());
             String imgUrl;
             int plcholder;
             //if phone is in landscape
@@ -98,7 +96,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
             int radius = 30; //corner radius
             int margin = 10; //crop margin
-            Glide.with(context).load(imgUrl).placeholder(plcholder).transform(new RoundedCornersTransformation(radius, margin)).into(ivPoster);
+            Glide.with(context).load(imgUrl).placeholder(plcholder).transform(new RoundedCornersTransformation(radius, margin)).into(itemMovieBinding.ivPoster);
 
         }
 
