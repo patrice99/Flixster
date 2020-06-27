@@ -137,7 +137,6 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         //to get the genre
         final String genreAPIKey = String.format(GENRE_API_URL, movie.getId());
-        Log.d("MovieDetailsActivity", genreAPIKey);
         AsyncHttpClient client1 = new AsyncHttpClient();
         client.get(genreAPIKey, new JsonHttpResponseHandler() {
             String TAG = "MovieDetailsActivity";
@@ -148,19 +147,11 @@ public class MovieDetailsActivity extends AppCompatActivity {
                 JSONObject jsonObject = json.jsonObject;
                 try {
                     JSONArray genreJsonArray = jsonObject.getJSONArray("genres");
-                    for(int i = 0; i < genreJsonArray.length(); i++){
-                        JSONObject each = (JSONObject) genreJsonArray.get(i);
-                        genres.add(each.getString("name"));
-                    }
+                    conCatGenres = Movie.forGenre(genreJsonArray);
                     
                 } catch (JSONException e) {
                     Log.e(TAG, "Hit JSON Exception trying to get genre");
                     e.printStackTrace();
-                }
-
-                for (int i = 0; i < genres.size(); i++) {
-                    conCatGenres += genres.get(i);
-                    if (i < genres.size() - 1) conCatGenres += ", ";
                 }
                 bindDetails.tvGenre.setText(conCatGenres);
             }

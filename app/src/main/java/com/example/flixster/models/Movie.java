@@ -18,6 +18,7 @@ public class Movie {
     Double voteAverage;
     Double popularity;
     Integer id;
+    String genreField;
 
     //default, no args constructor for parceler
     public Movie() {}
@@ -40,6 +41,22 @@ public class Movie {
         }
         return movies;
     }
+
+    public static String forGenre(JSONArray genreArray) throws JSONException {
+        ArrayList<String> genres = new ArrayList<>();
+        for(int i = 0; i < genreArray.length(); i++){
+            JSONObject each = (JSONObject) genreArray.get(i);
+            genres.add(each.getString("name"));
+        }
+        String conCatGenres = "";
+        for (int i = 0; i < genres.size(); i++) {
+            conCatGenres += genres.get(i);
+            if (i < genres.size() - 1) conCatGenres += ", ";
+        }
+        return conCatGenres;
+    }
+
+
 
 
     public String  getPosterPath() {

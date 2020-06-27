@@ -40,4 +40,5 @@
         android:layout_toEndOf="@+id/ivPoster"
         android:textColor="@color/white"
         tools:text="In a suburban fantasy world, two teenage elf brothers embark on an extraordinary quest to discover if there is still a little magic left out there." />
+
 </RelativeLayout>
