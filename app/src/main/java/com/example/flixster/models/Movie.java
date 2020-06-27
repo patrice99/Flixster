@@ -70,4 +70,6 @@ public class Movie {
     public Integer getId() {
         return id;
     }
+
+
 }

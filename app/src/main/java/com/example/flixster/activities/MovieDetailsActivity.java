@@ -27,16 +27,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import okhttp3.Headers;
 
 public class MovieDetailsActivity extends AppCompatActivity {
 
     public final String VIDEOS_API_URL = "https://api.themoviedb.org/3/movie/%d/videos" + "?api_key=6d1de0b93ec9c02249d4812fcce98720";
+    public final String GENRE_API_URL = "https://api.themoviedb.org/3/movie/%d" + "?api_key=6d1de0b93ec9c02249d4812fcce98720";
     String youtubeKey;
 
     //the movie details we want to display
     Movie movie;
+    String conCatGenres = "";
 
 
 
@@ -84,7 +89,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
 
 
-        final String fullAPIKey = String.format(VIDEOS_API_URL, movie.getId());
+        final String videoAPIKey = String.format(VIDEOS_API_URL, movie.getId());
 
         //set an OnClick Listener for the backdrop
         bindDetails.ivBackdrop.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +112,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(fullAPIKey, new JsonHttpResponseHandler() {
+        client.get(videoAPIKey, new JsonHttpResponseHandler() {
             String TAG = "MovieDetailsActivity";
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
@@ -128,6 +133,44 @@ public class MovieDetailsActivity extends AppCompatActivity {
                 Log.e(TAG, "onFailure");
             }
         });
+
+
+        //to get the genre
+        final String genreAPIKey = String.format(GENRE_API_URL, movie.getId());
+        Log.d("MovieDetailsActivity", genreAPIKey);
+        AsyncHttpClient client1 = new AsyncHttpClient();
+        client.get(genreAPIKey, new JsonHttpResponseHandler() {
+            String TAG = "MovieDetailsActivity";
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                ArrayList<String> genres = new ArrayList<>();
+                Log.i(TAG, "onSuccess for genre");
+                JSONObject jsonObject = json.jsonObject;
+                try {
+                    JSONArray genreJsonArray = jsonObject.getJSONArray("genres");
+                    for(int i = 0; i < genreJsonArray.length(); i++){
+                        JSONObject each = (JSONObject) genreJsonArray.get(i);
+                        genres.add(each.getString("name"));
+                    }
+                    
+                } catch (JSONException e) {
+                    Log.e(TAG, "Hit JSON Exception trying to get genre");
+                    e.printStackTrace();
+                }
+
+                for (int i = 0; i < genres.size(); i++) {
+                    conCatGenres += genres.get(i);
+                    if (i < genres.size() - 1) conCatGenres += ", ";
+                }
+                bindDetails.tvGenre.setText(conCatGenres);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+
+            }
+        });
+
 
     }
 }
