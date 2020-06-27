@@ -32,13 +32,13 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://github.com/patrice99/Flixster/blob/master/Kapture%202020-06-26%20at%2020.00.47.gif?raw=true' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/patrice99/Flixster/blob/master/Kapture%202020-06-27%20at%200.53.28.gif?raw=true' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [Kap](https://getkap.co/).
 
 ## Notes
 
-I had a challenge with the genres, since I had to do another API call in order to get the names and not the i.d. I also want to display the genres on the main page, but because I based my API call in the MovieDetailsActivity (which is only prompted from the main activity class, I could not find an easy way to do this. Overall I am very happy with my app!
+I had a challenge with the genres, since I had to do another API call in order to get the names and not the i.d. I also wanted to display the genres on the main page, but because I based my API call in the MovieDetailsActivity (which is only prompted from the main activity class, I could not find an easy way to do this. Overall I am very happy with my app!
 
 ## Open-source libraries used
 
