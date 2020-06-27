@@ -4,4 +4,7 @@
     <string name="poster_image">poster image</string>
     <string name="backdrop_image">backdrop image</string>
     <string name="trailer">Trailer:</string>
+    <string name="compose">Compose</string>
+    <string name="profile">Profile</string>
+    <string name="search">Search</string>
 </resources>
