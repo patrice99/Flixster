@@ -2,7 +2,7 @@
 
 **Flixster** shows the latest movies currently playing in theaters. The app utilizes the Movie Database API to display images and basic information about these movies to the user.
 
-Time spent: **16** hours spent in total
+Time spent: **20** hours spent in total
 
 ## User Stories
 
@@ -24,7 +24,9 @@ The following **stretch** features are implemented:
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you can get done to improve the app functionality!
+* [x] Added genres
+* [x] Added a custom toolbar
+   * [x] User can sort movies alphabetically
 
 ## Video Walkthrough
 
@@ -36,7 +38,7 @@ GIF created with [Kap](https://getkap.co/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+I had a challenge with the genres, since I had to do another API call in order to get the names and not the i.d. I also want to display the genres on the main page, but because I based my API call in the MovieDetailsActivity (which is only prompted from the main activity class, I could not find an easy way to do this. Overall I am very happy with my app!
 
 ## Open-source libraries used
 
